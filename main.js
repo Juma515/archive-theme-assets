@@ -9,6 +9,8 @@
     doc.body.classList.add('is-top');
   }
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* BASE の基本設定の背景色（{BackgroundTag} が body に出す）をヘッダー・ドロワーにも使う */
+  try { var bg = getComputedStyle(doc.body).backgroundColor; if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') root.style.setProperty('--c-bg', bg); } catch (e) {}
 
   /* ---------- ドロワー ---------- */
   var drawer = doc.getElementById('drawer'), menuBtn = doc.querySelector('.hd__menuBtn');
