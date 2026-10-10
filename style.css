@@ -259,6 +259,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .item__price .off { font-family: var(--font-body); font-style: normal; font-size: 12px; color: var(--c-accent); }
 .price-row { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; width: 100%; }
 .price-row__label { font-family: var(--font-body); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .6; min-width: 7em; }
+/* 英語の「From 2nd delivery」は長くスマホ幅で価格が次の行に落ちるため、狭い幅ではラベルを常に価格の上に置いて 2 行の形を揃える */
+@media (max-width: 767px) { .price-row__label { flex-basis: 100%; } }
 .item__attention { font-size: 12px; margin: 12px 0 16px; }
 .item__attention .attention { margin: 0 0 6px; opacity: .75; }
 .item__attention a { text-decoration: underline; }
