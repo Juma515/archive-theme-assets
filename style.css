@@ -128,7 +128,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .concept__img--tall { aspect-ratio: 4 / 5; }
 
 /* ---------- ピックアップ ---------- */
-.picks { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px; scrollbar-width: none; }
+/* scroll-snap は止まる位置に padding を含めないため、同じ値を scroll-padding にも入れないと 1 枚目が画面端に吸い付いて本文の左端とずれる */
+.picks { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px; scroll-padding-inline: 16px; scrollbar-width: none; }
 .picks::-webkit-scrollbar { display: none; }
 @media (min-width: 768px) { .picks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 0; padding: 0; overflow: visible; } }
 .pick { flex: 0 0 78%; scroll-snap-align: start; position: relative; display: block; }
@@ -141,9 +142,9 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .pick__body p { margin: 0; font-size: 13px; opacity: .75; }
 
 /* ---------- カテゴリ画像（JS で生成） ---------- */
-.cats { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px 8px; scrollbar-width: none; }
+.cats { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px 8px; scroll-padding-inline: 16px; scrollbar-width: none; }
 .cats::-webkit-scrollbar { display: none; }
-@media (min-width: 768px) { .cats { margin: 0 -32px; padding: 0 32px 8px; } }
+@media (min-width: 768px) { .cats { margin: 0 -32px; padding: 0 32px 8px; scroll-padding-inline: 32px; } }
 .cat { flex: 0 0 46%; scroll-snap-align: start; position: relative; display: block; }
 @media (min-width: 768px) { .cat { flex-basis: 23%; } }
 @media (min-width: 1025px) { .cat { flex-basis: calc((100% - 60px) / 6); } }
@@ -244,15 +245,17 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 /* ---------- 商品詳細 ---------- */
 .item { display: grid; gap: 24px; padding-top: 16px; }
 @media (min-width: 1025px) { .item { grid-template-columns: 7fr 5fr; gap: 64px; align-items: start; } }
-.gallery { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px; scrollbar-width: none; }
+.gallery { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px; scroll-padding-inline: 16px; scrollbar-width: none; }
 .gallery::-webkit-scrollbar { display: none; }
 .gallery__item { flex: 0 0 82%; scroll-snap-align: start; aspect-ratio: 3 / 4; background: var(--c-imgbg); overflow: hidden; }
-@media (min-width: 768px) { .gallery { margin: 0 -32px; padding: 0 32px; } .gallery__item { flex-basis: 60%; } }
+@media (min-width: 768px) { .gallery { margin: 0 -32px; padding: 0 32px; scroll-padding-inline: 32px; } .gallery__item { flex-basis: 60%; } }
 @media (min-width: 1025px) { .gallery { display: grid; grid-template-columns: 1fr 1fr; overflow: visible; margin: 0; padding: 0; } .gallery__item { flex: none; } .gallery__item:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 5; } }
 .gallery__item img { width: 100%; height: 100%; object-fit: cover; }
 .gallery__item img[src*="noimage"], .gallery__item img[src*="no_image"] { object-fit: contain; }
 /* 画像が 1 枚だけなら PC でも横幅いっぱいにしない */
 .gallery[data-count="1"] .gallery__item:first-child { aspect-ratio: 3 / 4; }
+/* 横スクロールで次の写真をのぞかせる幅にしているので、1 枚だけだと右側が空白になる。1 枚なら幅いっぱいにする */
+@media (max-width: 1024px) { .gallery[data-count="1"] .gallery__item { flex-basis: 100%; } }
 .item__info { position: sticky; top: 72px; padding-top: 8px; }
 .item__title { font-size: clamp(30px, 4vw, 46px); margin-bottom: 16px; overflow-wrap: anywhere; }
 .item__price { font-family: var(--font-head); font-size: 30px; font-weight: 400; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
