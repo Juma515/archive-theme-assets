@@ -173,6 +173,10 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .label { position: absolute; top: 10px; left: 10px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; padding: 4px 8px; background: var(--c-accent); color: #fff; pointer-events: none; }
 /* ラベル App の出力はクリックを妨げないよう pointer-events を切る */
 .card__applabel { position: absolute; top: 10px; right: 10px; pointer-events: none; }
+/* ラベル App の画像（Oval_new_rd.png など）は元サイズが大きいので幅を揃える */
+.card__applabel .label_image, .item__label .label_image { width: 56px; height: auto; display: block; }
+.item__label { margin-bottom: 12px; }
+.item__label .label_image { width: 72px; }
 .card--sold .card__img img { filter: grayscale(1); opacity: .6; }
 .card--sold .card__img::after { content: "Sold"; position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-head); font-style: italic; font-weight: 300; font-size: clamp(28px, 6vw, 56px); color: var(--c-text); pointer-events: none; }
 .more { display: block; width: 100%; margin: 48px 0 0; padding: 18px; border: 1px solid var(--c-text); background: none; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
