@@ -341,7 +341,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .itemOptionElement, .purchaseElement, .purchaseForm__item { margin-bottom: 12px; }
 .itemOption__name, .purchaseElement label, #purchase_form label { display: block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 6px; }
 .itemOption__select, .itemOption__input, .amountSelect, #purchase_form select, #purchase_form input[type="text"], #purchase_form input[type="number"] { width: 100%; min-height: 48px; border: 1px solid var(--c-text); background: transparent; padding: 0 14px; }
-.itemOption__select, .amountSelect, #purchase_form select { background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23111' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 14px center; padding-right: 36px; }
+/* BASE が商品フォームの直後に高い詳細度の <style> を出し、select の高さと矢印を上書きするため、それより強いセレクタで指定する */
+html body #purchase_form #itemSelect select.itemOption__select, html body #purchase_form #itemSelect #amountSelect, html body #purchase_form #itemSelect #valiationSelect, .itemOption__select, .amountSelect, #purchase_form select { height: 48px; min-height: 48px; line-height: 46px; font-family: inherit; font-size: 14px; color: inherit; border-radius: 0; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23111' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 14px center; background-size: 12px 8px; padding: 0 36px 0 14px; }
 .itemOption__caption { font-size: 12px; opacity: .7; margin: 6px 0; }
 .itemOption__caption--error { color: var(--c-accent); font-size: 12px; }
 .itemOption__count { font-size: 11px; opacity: .6; text-align: right; }
