@@ -15,7 +15,8 @@
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; font-family: var(--font-body); color: var(--c-text); line-height: 1.6; font-size: 14px; }
+/* 規約や商品説明に入る長い URL がスマホ幅ではみ出すので、収まらない単語だけ途中で折り返す */
+body { margin: 0; font-family: var(--font-body); color: var(--c-text); line-height: 1.6; font-size: 14px; overflow-wrap: break-word; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
