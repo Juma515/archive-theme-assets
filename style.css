@@ -377,9 +377,9 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .purchaseButtonModal__btn, .salesPeriodModal__btn { display: block; width: 100%; min-height: 52px; margin-top: 16px; border: 1px solid #111; background: #111; color: #fff; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
 .purchaseButtonModal__btn[disabled] { opacity: .4; cursor: default; }
 .purchaseButtonModal__btn--close, .salesPeriodModal__btn--close { background: transparent; color: #111; }
-#salesPeriodModal .salesPeriodModal__btn--submit, #salesPeriodModal .salesPeriodModal__btn--submit:hover { background: #111; border-color: #111; color: #fff; border-radius: 0; }
-#salesPeriodModal .salesPeriodModal__container { border-radius: 0; }
-#salesPeriodModal .salesPeriodModal__title { border-bottom: 1px solid #ddd; padding-bottom: 12px; }
+html body #salesPeriodModal .salesPeriodModal__btn--submit, html body #salesPeriodModal .salesPeriodModal__btn--submit:hover { background: #111; border-color: #111; color: #fff; border-radius: 0; }
+html body #salesPeriodModal .salesPeriodModal__btn--close { background: transparent; color: #111; border: 1px solid #111; border-radius: 0; }
+html body #salesPeriodModal .salesPeriodModal__container { border-radius: 0; }
 .purchaseButtonModal__closeIcon, .salesPeriodModal__closeIcon { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border: 0; background: none; cursor: pointer; }
 .purchaseButtonModal__closeIcon::before, .salesPeriodModal__closeIcon::before { content: "×"; font-size: 28px; line-height: 1; }
 .purchaseButtonModal__ageVerificationWarningText { font-size: 12px; margin: 12px 0 0; }
