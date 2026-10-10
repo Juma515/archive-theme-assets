@@ -348,7 +348,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .itemOption__count--error { color: var(--c-accent); opacity: 1; }
 [data-has-error="true"] { border-color: var(--c-accent) !important; }
 /* 年齢制限 App の注意文（商品価格より大きい文字が必須） */
-.ageVerificationWarning { font-size: 32px; line-height: 1.3; font-family: var(--font-jp); margin: 16px 0; }
+/* BASE が本文中に後出しする CSS より優先させる。商品価格（30px）より大きくする決まり */
+html body .ageVerificationWarning { font-size: 32px; line-height: 1.3; font-family: var(--font-jp); margin: 16px 0; }
 /* 予約販売 / テイクアウト / 抽選 / コミュニティ / メンバーシップ / 販売期間（{ItemAttentionTag} の出力） */
 .preOrder, .takeout, .lottery, .communityLabel, .membershipPoint { border: 1px solid var(--c-text); padding: 10px 14px; margin: 0 0 12px; font-size: 12px; }
 .preOrder__label, .takeout__label, .lottery__label, .communityLabel__title { display: inline-block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px; background: var(--c-text); color: #fff; margin-bottom: 6px; }
