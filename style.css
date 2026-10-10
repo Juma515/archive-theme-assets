@@ -298,6 +298,10 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .about__img img { width: 100%; height: 100%; object-fit: cover; }
 .page { max-width: 760px; margin: 0 auto; padding-top: 32px; font-size: 14px; line-height: 1.9; }
 .page h1, .page h2, .page h3 { margin: 0 0 16px; }
+/* お問い合わせフォームは BASE が dl/dd で出力し、ブラウザ既定の dd の左余白 40px で入力欄がラベルより右にずれる */
+.page dd { margin: 4px 0 16px; }
+/* 見出しは BASE が小文字の contact で出すので、ナビの Contact と表記を揃える */
+.inquirySection h1 { text-transform: capitalize; }
 .page p { margin: 0 0 1em; }
 .page a { text-decoration: underline; }
 .page input[type="text"], .page input[type="email"], .page input[type="tel"], .page textarea, .page select { width: 100%; border: 1px solid var(--c-text); background: transparent; padding: 12px 14px; min-height: 48px; margin: 4px 0 16px; }
