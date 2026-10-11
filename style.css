@@ -101,6 +101,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .hero__track::-webkit-scrollbar { display: none; }
 .hero__slide { position: relative; flex: 0 0 100%; height: 100%; scroll-snap-align: start; }
 .hero__slide img { width: 100%; height: 100%; object-fit: cover; }
+/* 横長の枠では写真の上下が切れ、人物の顔が上端で切れやすいので、上寄りを残す。 */
+.hero__slide img, .feature > img, .newsletter > img { object-position: 50% 25%; }
 .hero__slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0) 55%); }
 .hero__text { position: absolute; left: 16px; right: 16px; bottom: 28px; z-index: 1; color: #fff; }
 @media (min-width: 768px) { .hero__text { left: 32px; right: auto; bottom: 48px; max-width: 70%; } }
