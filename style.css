@@ -215,7 +215,9 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 @media (min-width: 768px) { .reviews { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1025px) { .reviews { grid-template-columns: repeat(4, 1fr); } }
 .review { padding: 24px 0; border-bottom: 1px solid var(--c-text); display: grid; grid-template-columns: auto 1fr; gap: 16px; }
-@media (min-width: 768px) { .review { padding: 24px 20px 24px 0; border-right: 1px solid var(--c-line); } .review:last-child { border-right: 0; } }
+/* 写真が無いと文章の箱が左の列（内容の幅）に入って左に寄るので、列をまたがせて中央に置く。 */
+.review > div:only-child { grid-column: 1 / -1; text-align: center; }
+@media (min-width: 768px) { .review { padding: 24px 20px; border-right: 1px solid var(--c-line); } .review:last-child { border-right: 0; } }
 .review img { width: 64px; height: 84px; object-fit: cover; }
 .review p { margin: 0 0 8px; font-size: 13px; }
 .review small { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; opacity: .55; }
