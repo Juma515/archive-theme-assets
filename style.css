@@ -39,6 +39,8 @@ a { color: inherit; text-decoration: none; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 h1, h2, h3 { font-family: var(--font-head); font-weight: 300; line-height: 1.02; letter-spacing: -.01em; margin: 0; }
 button, input, select, textarea { font: inherit; color: inherit; }
+/* キーボード操作時の枠は、ブラウザ標準の青ではなく文字色の細い線にそろえる */
+:focus-visible { outline: 1px solid var(--c-text); outline-offset: 3px; }
 /* Safari の input/select 標準スタイルを消す（審査の NG 例に明記あり）。BASE が出す要素も対象 */
 input, select, textarea, button { -webkit-appearance: none; appearance: none; border-radius: 0; }
 .wrap { width: 100%; margin: 0 auto; padding: 0 16px; }
@@ -67,7 +69,10 @@ input, select, textarea, button { -webkit-appearance: none; appearance: none; bo
 .hd__tools { display: flex; align-items: center; gap: 14px; justify-self: end; }
 .hd__search { display: none; }
 @media (min-width: 1025px) { .hd__search { display: block; } }
-.search { display: flex; align-items: center; border-bottom: 1px solid var(--c-rule); }
+.search { display: flex; align-items: center; border-bottom: 1px solid var(--c-rule); transition: border-color .15s, box-shadow .15s; }
+/* 入力中はブラウザ標準の青い枠ではなく、下線を文字色で太くして示す */
+.search:focus-within { border-bottom-color: var(--c-text); box-shadow: 0 1px 0 var(--c-text); }
+.search__input:focus, .search__input:focus-visible { outline: none; }
 .search__input { border: 0; background: none; padding: 6px 6px; width: 150px; min-width: 0; font-size: 13px; }
 .search__btn { border: 0; background: none; padding: 4px; cursor: pointer; display: grid; place-items: center; }
 .hd__i18n { display: none; }
