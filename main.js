@@ -179,6 +179,10 @@
     }
   }
 
+  /* ---------- 通報の小窓: 商品情報の列が sticky で重なり順の土台になり、小窓が後ろの関連商品に隠れて位置もずれるので、body 直下へ移す ---------- */
+  var irBG = doc.getElementById('irBG'), irBox = doc.getElementById('irContainer');
+  if (irBG && irBox) { doc.body.appendChild(irBG); doc.body.appendChild(irBox); }
+
   /* ---------- シェア: 端末の共有画面（Instagram・LINE などのアプリに渡せる）が使えるときだけボタンを出す ---------- */
   var shareBox = doc.getElementById('itemShare'), shareNative = doc.getElementById('shareNative');
   if (shareBox && shareNative && navigator.share) {
