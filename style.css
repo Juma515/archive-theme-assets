@@ -97,7 +97,9 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .hero__slide { position: relative; flex: 0 0 100%; height: 100%; scroll-snap-align: start; }
 .hero__slide img { width: 100%; height: 100%; object-fit: cover; }
 /* 横長の枠では写真の上下が切れ、人物の顔が上端で切れやすいので、上寄りを残す。 */
-.hero__slide img, .feature > img, .newsletter > img { object-position: 50% 25%; }
+.feature > img, .newsletter > img { object-position: 50% 25%; }
+/* 縦長の人物写真を PC の横長枠で見せるとき、頭を枠の上端近くに置いて胸まで入れる（25% だと顔が中央に来て体が切れる） */
+.hero__slide img { object-position: 50% 31%; }
 .hero__slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0) 55%); }
 .hero__text { position: absolute; left: 16px; right: 16px; bottom: 28px; z-index: 1; color: #fff; }
 @media (min-width: 768px) { .hero__text { left: 32px; right: auto; bottom: 48px; max-width: 70%; } }
