@@ -39,7 +39,7 @@ input, select, textarea, button { -webkit-appearance: none; appearance: none; bo
 /* ---------- お知らせの帯（デザインオプション） ---------- */
 
 /* ---------- ヘッダー ---------- */
-.hd { position: sticky; top: 0; z-index: 20; background-color: var(--c-bg, #ffffff); border-bottom: 1px solid var(--c-rule); }
+.hd { position: sticky; top: 0; z-index: 20; background-color: var(--c-bg, #ffffff); }
 .hd__in { display: grid; grid-template-columns: 1fr auto; align-items: center; min-height: 56px; gap: 16px; }
 @media (min-width: 1025px) { .hd__in { grid-template-columns: auto 1fr auto; } }
 .hd__logo .logoText { font-family: var(--font-head); font-weight: 400; font-size: 20px; letter-spacing: .04em; white-space: nowrap; }
