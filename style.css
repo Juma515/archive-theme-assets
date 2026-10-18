@@ -5,8 +5,8 @@
    スタイルは末尾の「BASE の出力要素」にまとめる。
    ============================================================ */
 :root {
+  /* 書体はこの 2 行だけで決める。替えるときは、テンプレート（scripts/build-template.py）の Google Fonts の行も同じ書体に替える */
   --font-head: "Cormorant Garamond", "Noto Serif JP", serif;
-  --font-jp: "Noto Serif JP", serif;
   --font-body: "Inter", "Noto Sans JP", sans-serif;
   --c-text: #111111;
   --c-line: #d9d5cc;
@@ -75,7 +75,7 @@ body.is-drawerOpen { overflow: hidden; }
 .sec__head { display: flex; justify-content: space-between; align-items: end; gap: 16px; border-bottom: 1px solid var(--c-text); padding-bottom: 12px; margin-bottom: 28px; }
 .sec__title { font-size: clamp(30px, 4.2vw, 56px); }
 .sec__title--search { font-size: clamp(22px, 3vw, 36px); overflow-wrap: anywhere; }
-.sec__title small { display: block; font-family: var(--font-jp); font-size: 13px; letter-spacing: .06em; font-weight: 300; margin-top: 8px; opacity: .7; }
+.sec__title small { display: block; font-family: var(--font-head); font-size: 13px; letter-spacing: .06em; font-weight: 300; margin-top: 8px; opacity: .7; }
 .sec__link { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
 .empty { text-align: center; padding: 96px 0; opacity: .6; }
 .crumb { font-size: 12px; letter-spacing: .08em; opacity: .7; margin-bottom: 12px; }
@@ -137,7 +137,7 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .pick:hover .pick__img img { transform: scale(1.04); }
 .pick__num { position: absolute; top: 12px; left: 14px; font-family: var(--font-head); font-weight: 300; font-style: italic; font-size: 40px; line-height: 1; color: #fff; mix-blend-mode: difference; }
 .pick__body { padding-top: 12px; border-top: 1px solid var(--c-text); margin-top: 12px; }
-.pick__body h3 { font-family: var(--font-jp); font-weight: 400; font-size: 17px; margin-bottom: 6px; }
+.pick__body h3 { font-family: var(--font-head); font-weight: 400; font-size: 17px; margin-bottom: 6px; }
 .pick__body p { margin: 0; font-size: 14px; opacity: .8; }
 
 /* ---------- カテゴリ画像（JS で生成） ---------- */
@@ -203,7 +203,7 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .post__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
 .post:hover .post__img img { transform: scale(1.04); }
 .post__meta { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; opacity: .7; margin: 12px 0 4px; }
-.post h3 { font-family: var(--font-jp); font-weight: 400; font-size: 17px; }
+.post h3 { font-family: var(--font-head); font-weight: 400; font-size: 17px; }
 
 /* ---------- お客様の声 / 基本サービス ---------- */
 .reviews { display: grid; border-top: 1px solid var(--c-text); }
@@ -261,9 +261,9 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 /* 価格は読み取りが最優先なので、見出しの書体（数字が古い字形）ではなく本文の書体で出す */
 .item__price { font-size: 22px; font-weight: 500; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
 .item__price del { font-size: 14px; opacity: .65; }
-.item__price .off { font-family: var(--font-body); font-style: normal; font-size: 12px; padding: 2px 8px; background: var(--c-accent); color: #fff; letter-spacing: .04em; }
+.item__price .off { font-style: normal; font-size: 12px; padding: 2px 8px; background: var(--c-accent); color: #fff; letter-spacing: .04em; }
 .price-row { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; width: 100%; }
-.price-row__label { font-family: var(--font-body); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .7; min-width: 7em; }
+.price-row__label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .7; min-width: 7em; }
 /* 英語の「From 2nd delivery」は長くスマホ幅で価格が次の行に落ちるため、狭い幅ではラベルを常に価格の上に置いて 2 行の形を揃える */
 @media (max-width: 767px) { .price-row__label { flex-basis: 100%; } }
 .item__attention { font-size: 13px; margin: 12px 0 16px; }
@@ -392,7 +392,7 @@ html body #purchase_form #itemSelect select.itemOption__select, html body #purch
 [data-has-error="true"] { border-color: var(--c-accent) !important; }
 /* 年齢制限 App の注意文（商品価格より大きい文字が必須） */
 /* BASE が本文中に後出しする CSS より優先させる。商品価格（30px）より大きくする決まり */
-html body .ageVerificationWarning { font-size: 32px; line-height: 1.3; font-family: var(--font-jp); margin: 16px 0; color: var(--c-text); }
+html body .ageVerificationWarning { font-size: 32px; line-height: 1.3; font-family: var(--font-head); margin: 16px 0; color: var(--c-text); }
 /* 予約販売 / テイクアウト / 抽選 / コミュニティ / メンバーシップ / 販売期間（{ItemAttentionTag} の出力） */
 .preOrder, .takeout, .lottery, .communityLabel, .membershipPoint { border: 1px solid var(--c-text); padding: 10px 14px; margin: 0 0 12px; font-size: 12px; }
 .preOrder__label, .takeout__label, .lottery__label, .communityLabel__title { display: inline-block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px; background: var(--c-text); color: var(--c-on-text, #fff); margin-bottom: 6px; }
