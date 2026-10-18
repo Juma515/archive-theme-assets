@@ -43,8 +43,10 @@ input, select, textarea, button { -webkit-appearance: none; appearance: none; bo
 .nav__list { display: flex; gap: 28px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
 .nav__list > li { position: relative; }
 .nav__catBtn { border: 0; background: none; padding: 0; cursor: pointer; font-size: inherit; letter-spacing: inherit; text-transform: inherit; }
-.nav__catPanel { display: none; position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 16px; background: var(--c-bg, #ffffff); border: 1px solid var(--c-text); text-transform: none; letter-spacing: .04em; font-size: 13px; max-height: 70vh; overflow: auto; }
-.nav__cat.is-open .nav__catPanel, .nav__cat:hover .nav__catPanel { display: block; }
+.nav__catPanel { visibility: hidden; opacity: 0; transition: opacity .15s, visibility 0s linear .15s; position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 16px; background: var(--c-bg, #ffffff); border: 1px solid var(--c-text); text-transform: none; letter-spacing: .04em; font-size: 13px; max-height: 70vh; overflow: auto; }
+/* 通りすがりのカーソルで開かないよう、乗せてから 0.3 秒後に出す。押したときは待たない */
+.nav__cat:hover .nav__catPanel { visibility: visible; opacity: 1; transition-delay: .3s; }
+.nav__cat.is-open .nav__catPanel { visibility: visible; opacity: 1; transition-delay: 0s; }
 .hd__tools { display: flex; align-items: center; gap: 14px; justify-self: end; }
 .hd__search { display: none; }
 @media (min-width: 1025px) { .hd__search { display: block; } }
@@ -62,7 +64,7 @@ input, select, textarea, button { -webkit-appearance: none; appearance: none; bo
 .drawer__close { justify-self: end; border: 0; background: none; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; padding: 8px 0; }
 .drawer__nav ul { display: grid; gap: 0; }
 .drawer__nav li > a, .drawer__nav .nav__catBtn { display: block; width: 100%; text-align: left; padding: 14px 0; border-bottom: 1px solid var(--c-line); font-family: var(--font-head); font-size: 22px; letter-spacing: .02em; text-transform: none; }
-.drawer__nav .nav__catPanel { position: static; display: block; border: 0; padding: 4px 0 12px 12px; max-height: none; }
+.drawer__nav .nav__catPanel { position: static; display: block; visibility: visible; opacity: 1; transition: none; border: 0; padding: 4px 0 12px 12px; max-height: none; }
 .drawer__nav .nav__catPanel:not(.is-open) { display: none; }
 .drawer__nav .nav__cat.is-open .nav__catPanel { display: block; }
 body.is-drawerOpen { overflow: hidden; }
@@ -328,7 +330,7 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 
 /* ---------- フッター ---------- */
 .ft { border-top: 1px solid var(--c-text); margin-top: 96px; padding: 32px 0 96px; }
-.ft__big { font-family: var(--font-head); font-weight: 300; font-size: clamp(40px, 9vw, 140px); line-height: 1; margin: 0 0 24px; overflow-wrap: anywhere; }
+.ft__big { font-family: var(--font-head); font-weight: 300; font-size: clamp(32px, 5vw, 72px); line-height: 1; margin: 0 0 24px; overflow-wrap: anywhere; }
 .ft__text { font-size: 14px; max-width: 48ch; margin: 0 0 24px; }
 .ft__row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
 .ft__nav, .ft__sns { display: flex; flex-wrap: wrap; gap: 12px 20px; }
