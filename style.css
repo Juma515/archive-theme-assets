@@ -108,7 +108,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { html.js .rv { opacity: 1; transform: none; transition: none; } }
 
 /* ---------- ヒーロー ---------- */
-.hero { position: relative; height: 88svh; min-height: 520px; max-height: 960px; overflow: hidden; background: #111; }
+/* 開いたときにメイン画像が画面いっぱいになる高さ（ヘッダー 56px を除く）。svh はスマホのアドレスバーを除いた高さ */
+.hero { position: relative; height: calc(100svh - var(--hero-top, 56px)); min-height: 520px; overflow: hidden; background: #111; }
 .hero__track { display: flex; height: 100%; scroll-snap-type: x mandatory; overflow-x: auto; scrollbar-width: none; }
 .hero__track::-webkit-scrollbar { display: none; }
 .hero__slide { position: relative; flex: 0 0 100%; height: 100%; scroll-snap-align: start; }
@@ -389,6 +390,18 @@ html body .x_i18nSelectBox { height: auto; line-height: 1.4; border-radius: 0; }
 /* キーボードやクリックで選んだときの枠が文字に重ならないよう、少し外側に出す */
 .x_i18nSelectBox:focus-visible { outline-offset: 2px; }
 .drawer__i18n #i18 { margin-top: 8px; }
+/* JS が付け替えた言語・通貨のメニュー。元の select は見えなくするが、JS が無いときはそのまま使える */
+.x_i18nSelectBox.is-replaced { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); opacity: 0; pointer-events: none; }
+#i18 .input { position: relative; }
+.i18sel { position: relative; }
+.i18sel__btn { border: 0; border-bottom: 1px solid var(--c-rule); background: none; padding: 6px 20px 6px 6px; font-size: 12px; letter-spacing: .08em; line-height: 1.4; color: inherit; cursor: pointer; white-space: nowrap; position: relative; }
+.i18sel__btn::after { content: ""; position: absolute; right: 5px; top: 50%; width: 6px; height: 6px; margin-top: -5px; border-right: 1.3px solid currentColor; border-bottom: 1.3px solid currentColor; transform: rotate(45deg); }
+.i18sel__list { position: absolute; top: calc(100% + 6px); left: 0; z-index: 25; min-width: 100%; margin: 0; padding: 6px 0; list-style: none; background: var(--c-header-bg); color: var(--c-header-text); border: 1px solid var(--c-rule); }
+.i18sel__list[hidden] { display: none; }
+.i18sel__opt { display: block; width: 100%; border: 0; background: none; padding: 8px 14px; font-size: 12px; letter-spacing: .08em; text-align: left; color: inherit; cursor: pointer; white-space: nowrap; }
+.i18sel__opt:hover, .i18sel__opt:focus-visible { background: rgba(127, 127, 127, .15); outline: none; }
+.i18sel__opt[aria-selected="true"] { font-weight: 500; }
+.drawer__i18n .i18sel__list { background: var(--c-header-bg); }
 /* 購入ボタン（item-purchase） */
 .purchaseButton__btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 56px; margin-top: 8px; border: 1px solid var(--c-btn-bg); background: var(--c-btn-bg); color: var(--c-btn-text); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; text-align: center; cursor: pointer; text-decoration: none; }
 .purchaseButton__btn[disabled], .purchaseButton__btn--soldOut, .purchaseButton__btn--endOfSale, .purchaseButton__btn--comingSoonStay, .purchaseButton__btn--notApplying { background: transparent; color: var(--c-text); opacity: .55; cursor: default; text-align: center; }

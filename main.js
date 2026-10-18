@@ -45,6 +45,12 @@
 
 
   /* ---------- ヒーロー: scroll-snap の自動送り（指でも送れる） ---------- */
+  /* メイン画像の上にある高さ（ヘッダー + BASE のお知らせ帯など）を測り、画面の残り全部をメイン画像にする */
+  var hero = doc.querySelector('.hero');
+  if (hero) {
+    var fitHero = function () { root.style.setProperty('--hero-top', Math.round(hero.getBoundingClientRect().top + window.scrollY) + 'px'); };
+    fitHero(); window.addEventListener('resize', fitHero); window.addEventListener('load', fitHero);
+  }
   var track = doc.querySelector('.hero__track'), dots = doc.querySelectorAll('.hero__dots span');
   if (track && track.children.length > 1) {
     var cur = 0, count = track.children.length, timer;
@@ -178,6 +184,36 @@
       });
     }
   }
+
+  /* ---------- 言語・通貨の切替（英語・外貨対応 App）: OS 標準のプルダウンはテーマの見た目に合わせられないので、同じ選択肢の小さなメニューに置き換える ---------- */
+  Array.prototype.forEach.call(doc.querySelectorAll('select.x_i18nSelectBox'), function (sel) {
+    if (sel.options.length < 2 || sel.parentNode.querySelector('.i18sel')) return;
+    var box = doc.createElement('div'), btn = doc.createElement('button'), list = doc.createElement('ul');
+    box.className = 'i18sel'; btn.type = 'button'; btn.className = 'i18sel__btn'; btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
+    btn.textContent = sel.options[sel.selectedIndex].text; list.className = 'i18sel__list'; list.setAttribute('role', 'listbox'); list.hidden = true;
+    Array.prototype.forEach.call(sel.options, function (o) {
+      var li = doc.createElement('li'), b = doc.createElement('button');
+      b.type = 'button'; b.className = 'i18sel__opt'; b.setAttribute('role', 'option'); b.setAttribute('aria-selected', String(o.selected)); b.textContent = o.text;
+      b.addEventListener('click', function () {
+        close();
+        if (o.selected) return;
+        sel.value = o.value;
+        btn.textContent = o.text;
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+        // App の JS が change で送信しなかったときの保険
+        setTimeout(function () { if (sel.form) sel.form.submit(); }, 400);
+      });
+      li.appendChild(b); list.appendChild(li);
+    });
+    function open() { list.hidden = false; btn.setAttribute('aria-expanded', 'true'); doc.addEventListener('click', onDoc); doc.addEventListener('keydown', onKey); }
+    function close() { list.hidden = true; btn.setAttribute('aria-expanded', 'false'); doc.removeEventListener('click', onDoc); doc.removeEventListener('keydown', onKey); }
+    function onDoc(e) { if (!box.contains(e.target)) close(); }
+    function onKey(e) { if (e.key === 'Escape') { close(); btn.focus(); } }
+    btn.addEventListener('click', function () { list.hidden ? open() : close(); });
+    box.appendChild(btn); box.appendChild(list);
+    sel.classList.add('is-replaced'); sel.tabIndex = -1; sel.setAttribute('aria-hidden', 'true');
+    sel.parentNode.insertBefore(box, sel);
+  });
 
   /* ---------- 通報の小窓: 商品情報の列が sticky で重なり順の土台になり、小窓が後ろの関連商品に隠れて位置もずれるので、body 直下へ移す ---------- */
   var irBG = doc.getElementById('irBG'), irBox = doc.getElementById('irContainer');
