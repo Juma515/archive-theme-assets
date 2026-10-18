@@ -331,6 +331,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 /* ---------- フッター ---------- */
 .ft { border-top: 1px solid var(--c-text); margin-top: 96px; padding: 32px 0 96px; }
 .ft__big { font-family: var(--font-head); font-weight: 300; font-size: clamp(32px, 5vw, 72px); line-height: 1; margin: 0 0 24px; overflow-wrap: anywhere; }
+/* 商品ページは商品名が主役なので、フッターの大きなショップ名は出さない */
+.is-item .ft__big { display: none; }
 .ft__text { font-size: 14px; max-width: 48ch; margin: 0 0 24px; }
 .ft__row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
 .ft__nav, .ft__sns { display: flex; flex-wrap: wrap; gap: 12px 20px; }
