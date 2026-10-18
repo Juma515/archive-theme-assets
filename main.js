@@ -1,6 +1,6 @@
 /* Archive — BASE デザインテーマの JS。jQuery に依存しない。
    やること: ドロワー / お知らせ帯 / ヒーロー自動送り / スクロール表示 / 追加読み込み（ブラウザバックの復元つき）
-   / カテゴリ画像タイル / ブログ RSS / 実寸表 */
+   / カテゴリ画像タイル / ブログ RSS / 実寸表 / 写真のサムネイル帯 / 最近チェックした商品 */
 (function () {
   'use strict';
   var doc = document, root = doc.documentElement;
@@ -11,6 +11,15 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* BASE の基本設定の背景色（{BackgroundTag} が body に出す）をヘッダー・ドロワーにも使う */
   try { var bg = getComputedStyle(doc.body).backgroundColor; if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') root.style.setProperty('--c-bg', bg); } catch (e) {}
+  try {
+    var m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(getComputedStyle(doc.body).color);
+    if (m) {
+      var light = (0.299 * m[1] + 0.587 * m[2] + 0.114 * m[3]) > 160;
+      root.style.setProperty('--c-on-text', light ? '#111111' : '#ffffff');
+      // 背景が画像のときは下地の色が分からないので、ヘッダーやメニューの地は文字色と反対の色にする
+      if (!root.style.getPropertyValue('--c-bg')) root.style.setProperty('--c-bg', light ? '#111111' : '#ffffff');
+    }
+  } catch (e) {}
 
   /* ---------- ドロワー ---------- */
   var drawer = doc.getElementById('drawer'), menuBtn = doc.querySelector('.hd__menuBtn');
@@ -34,13 +43,6 @@
     });
   });
 
-  /* ---------- お知らせ帯: 文言を複製して途切れなく流す ---------- */
-  var mq = doc.querySelector('.marquee__in');
-  if (mq && mq.firstElementChild) {
-    var span = mq.firstElementChild, n = Math.max(2, Math.ceil(window.innerWidth * 2 / Math.max(span.offsetWidth, 1)));
-    for (var i = 1; i < n; i++) mq.appendChild(span.cloneNode(true));
-    if (!reduce) mq.classList.add('is-anim');
-  }
 
   /* ---------- ヒーロー: scroll-snap の自動送り（指でも送れる） ---------- */
   var track = doc.querySelector('.hero__track'), dots = doc.querySelectorAll('.hero__dots span');
@@ -147,5 +149,62 @@
       rows.push('<li><span>' + m[1] + '</span><b>' + m[3] + '</b></li>');
     }
     if (rows.length >= 2) { specList.innerHTML = rows.join(''); spec.hidden = false; }
+  }
+
+  /* ---------- 写真のサムネイル帯: スマホ・タブレットで「3 / 12」と小さい写真を出し、めくりと連動させる ---------- */
+  var gallery = doc.getElementById('gallery'), galnav = doc.getElementById('galnav');
+  if (gallery && galnav && 'IntersectionObserver' in window) {
+    var gItems = gallery.querySelectorAll('.gallery__item'), thumbs = galnav.querySelectorAll('.galnav__thumb');
+    if (gItems.length >= 2 && thumbs.length === gItems.length) {
+      var galNow = doc.getElementById('galnavNow'), strip = doc.getElementById('galnavThumbs');
+      var selectThumb = function (i) {
+        galNow.textContent = i + 1;
+        Array.prototype.forEach.call(thumbs, function (t, j) { t.setAttribute('aria-current', String(i === j)); });
+        var t = thumbs[i];
+        strip.scrollTo({ left: t.offsetLeft - strip.clientWidth / 2 + t.clientWidth / 2, behavior: 'smooth' });
+      };
+      galnav.hidden = false;
+      selectThumb(0);
+      // 写真が 6 割見えたら「今の写真」とみなす
+      var gio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) selectThumb(Array.prototype.indexOf.call(gItems, e.target)); });
+      }, { root: gallery, threshold: 0.6 });
+      Array.prototype.forEach.call(gItems, function (it) { gio.observe(it); });
+      Array.prototype.forEach.call(thumbs, function (t, i) {
+        t.addEventListener('click', function () {
+          var pad = parseFloat(getComputedStyle(gallery).scrollPaddingLeft) || 0;
+          gallery.scrollTo({ left: gItems[i].offsetLeft - gallery.offsetLeft - pad, behavior: 'smooth' });
+        });
+      });
+    }
+  }
+
+  /* ---------- 最近チェックした商品: 見た商品をこのブラウザに 12 件まで覚え、いま見ている商品以外を 8 件まで出す ---------- */
+  var recent = doc.getElementById('recent'), recentList = doc.getElementById('recentList');
+  if (recent && recentList) {
+    var RKEY = 'archive-recent', rlist = [];
+    try { rlist = JSON.parse(localStorage.getItem(RKEY) || '[]'); } catch (e) { rlist = []; }
+    if (!Array.isArray(rlist)) rlist = [];
+    var rcur = recent.getAttribute('data-id');
+    if (rcur) {
+      rlist = rlist.filter(function (x) { return x && x.id !== rcur; });
+      rlist.unshift({ id: rcur, t: recent.getAttribute('data-title'), p: recent.getAttribute('data-price'), i: recent.getAttribute('data-img'), u: location.href.split(/[?#]/)[0] });
+      rlist = rlist.slice(0, 12);
+      try { localStorage.setItem(RKEY, JSON.stringify(rlist)); } catch (e) {}
+    }
+    // 保存領域が書き換えられていても、リンク先は http(s) の URL だけに限る
+    var okUrl = /^https?:\/\//;
+    var show = rlist.filter(function (x) { return x && x.id !== rcur && okUrl.test(x.u || '') && (!x.i || okUrl.test(x.i)); }).slice(0, 8);
+    if (show.length) {
+      show.forEach(function (x) {
+        var li = doc.createElement('li'), a = doc.createElement('a'), fig = doc.createElement('div'), row = doc.createElement('div');
+        li.className = 'card'; a.className = 'card__link'; a.href = x.u; fig.className = 'card__img'; row.className = 'card__row';
+        if (x.i) { var img = doc.createElement('img'); img.src = x.i; img.alt = x.t || ''; img.loading = 'lazy'; fig.appendChild(img); }
+        var title = doc.createElement('p'), price = doc.createElement('p'), span = doc.createElement('span');
+        title.className = 'card__title'; title.textContent = x.t || ''; price.className = 'card__price'; span.textContent = x.p || '';
+        price.appendChild(span); row.appendChild(title); row.appendChild(price); a.appendChild(fig); a.appendChild(row); li.appendChild(a); recentList.appendChild(li);
+      });
+      recent.hidden = false;
+    }
   }
 })();
