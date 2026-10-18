@@ -272,9 +272,15 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .item__desc a { text-decoration: underline; }
 .item__file { font-size: 14px; overflow-wrap: anywhere; margin: 16px 0 0; }
 .item__notice { font-size: 13px; opacity: .75; margin-top: 16px; border-top: 1px solid var(--c-line); padding-top: 12px; white-space: pre-line; }
-.item__share { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 24px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
-.item__shareLink { border-bottom: 1px solid currentColor; }
-.item__report { margin-top: 16px; font-size: 12px; opacity: .7; }
+.item__share { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 24px; }
+.item__shareLabel { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; margin-right: 8px; }
+.item__shareBtn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--c-line); border-radius: 50%; background: none; padding: 0; color: inherit; cursor: pointer; }
+.item__shareBtn:hover { border-color: var(--c-text); }
+.item__shareNative[hidden] { display: none; }
+.item__social { display: inline-flex; align-items: center; }
+/* 通報の小窓もこの中に出るので、薄くするのはリンクだけにする */
+.item__report { margin-top: 16px; font-size: 12px; }
+.item__report > a { opacity: .7; }
 .item__report a { text-decoration: underline; }
 .item__custom { margin-top: 64px; }
 .item__review { margin-top: 64px; }
@@ -283,7 +289,7 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .spec ul { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--c-text); }
 .spec li { padding: 12px 0; }
 .spec li span { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
-.spec li b { font-family: var(--font-head); font-size: 30px; font-weight: 400; }
+.spec li b { font-size: 22px; font-weight: 400; font-variant-numeric: lining-nums tabular-nums; }
 .related, .recent { margin-top: 96px; }
 .related h2, .recent h2 { font-size: clamp(28px, 4vw, 48px); margin-bottom: 24px; border-bottom: 1px solid var(--c-text); padding-bottom: 12px; }
 .recent[hidden] { display: none; }
@@ -330,6 +336,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 
 /* ---------- フッター ---------- */
 .ft { border-top: 1px solid var(--c-text); margin-top: 96px; padding: 32px 0 96px; }
+/* 商品ページは大きなショップ名が無いので、リンクの行を上下の真ん中に置く */
+.is-item .ft { padding: 40px 0; }
 .ft__big { font-family: var(--font-head); font-weight: 300; font-size: clamp(32px, 5vw, 72px); line-height: 1; margin: 0 0 24px; overflow-wrap: anywhere; }
 /* 商品ページは商品名が主役なので、フッターの大きなショップ名は出さない */
 .is-item .ft__big { display: none; }
@@ -361,6 +369,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 #i18 { display: flex; gap: 10px; align-items: center; }
 #i18 form, #i18 .input { display: inline-block; margin: 0; }
 .x_i18nSelectBox { border: 0; border-bottom: 1px solid var(--c-text); background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23111' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right 4px center; padding: 6px 20px 6px 6px; font-size: 12px; letter-spacing: .08em; cursor: pointer; }
+/* App 側の CSS が高さ 30px・行の高さ 30px を決め打ちするので、余白を足した分だけ文字が上下に切れる。高さを自動にして打ち消す */
+html body .x_i18nSelectBox { height: auto; line-height: 1.4; border-radius: 0; }
 /* キーボードやクリックで選んだときの枠が文字に重ならないよう、少し外側に出す */
 .x_i18nSelectBox:focus-visible { outline-offset: 2px; }
 .drawer__i18n #i18 { margin-top: 8px; }

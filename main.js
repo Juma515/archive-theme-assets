@@ -179,6 +179,15 @@
     }
   }
 
+  /* ---------- シェア: 端末の共有画面（Instagram・LINE などのアプリに渡せる）が使えるときだけボタンを出す ---------- */
+  var shareBox = doc.getElementById('itemShare'), shareNative = doc.getElementById('shareNative');
+  if (shareBox && shareNative && navigator.share) {
+    shareNative.hidden = false;
+    shareNative.addEventListener('click', function () {
+      navigator.share({ title: shareBox.getAttribute('data-title') || doc.title, url: shareBox.getAttribute('data-url') || location.href }).catch(function () {});
+    });
+  }
+
   /* ---------- 最近チェックした商品: 見た商品をこのブラウザに 12 件まで覚え、いま見ている商品以外を 8 件まで出す ---------- */
   var recent = doc.getElementById('recent'), recentList = doc.getElementById('recentList');
   if (recent && recentList) {
