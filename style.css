@@ -8,6 +8,11 @@
   /* 書体はこの 2 行だけで決める。替えるときは、テンプレート（scripts/build-template.py）の Google Fonts の行も同じ書体に替える */
   --font-head: "Cormorant Garamond", "Noto Serif JP", serif;
   --font-body: "Inter", "Noto Sans JP", sans-serif;
+}
+/* デザイン設定「書体」。body の class で先頭の 2 つを差し替える。ここにない書体は Google Fonts の行にも無いので表示されない */
+body.font-sans { --font-head: "Inter", "Noto Sans JP", sans-serif; }
+body.font-mincho { --font-head: "Shippori Mincho", "Noto Serif JP", serif; --font-body: "Shippori Mincho", "Noto Serif JP", serif; }
+:root {
   --c-text: #111111;
   --c-line: #d9d5cc;
   --c-imgbg: #e9e5dc;
