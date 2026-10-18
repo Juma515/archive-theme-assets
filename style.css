@@ -353,6 +353,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .page iframe { max-width: 100%; }
 
 /* ---------- フッター ---------- */
+/* 古いテンプレートに残っているフッターのショップ名を出さない（新しいテンプレートには無い） */
+.ft__big { display: none; }
 .ft { border-top: 1px solid var(--c-rule); margin-top: 96px; padding: 40px 0; background: var(--c-footer-bg); color: var(--c-footer-text); }
 .ft__text { font-size: 14px; max-width: 48ch; margin: 0 0 24px; }
 .ft__row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
