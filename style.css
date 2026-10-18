@@ -17,7 +17,18 @@ body.font-mincho { --font-head: "Shippori Mincho", "Noto Serif JP", serif; --fon
   --c-rule: var(--c-text); /* 区切り線の色。デザイン設定「罫線の色」で差し替える */
   --c-line: #d9d5cc;
   --c-imgbg: #e9e5dc;
-  --c-accent: #b23a1b; /* head 内の style でデザインオプションから上書き */
+  --c-accent: #b23a1b;
+  /* ここから下はデザイン設定の色。head の style が設定値で上書きし、空のときはこの既定にする */
+  --c-header-bg: var(--c-bg, #ffffff);
+  --c-header-text: var(--c-text);
+  --c-btn-bg: var(--c-text);
+  --c-btn-text: var(--c-on-text, #ffffff);
+  --c-footer-bg: transparent;
+  --c-footer-text: var(--c-text);
+  --c-hero-title: #ffffff;
+  --c-hero-text: #ffffff;
+  --c-hero-btn-bg: #ffffff;
+  --c-hero-btn-text: #111111;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -39,7 +50,7 @@ input, select, textarea, button { -webkit-appearance: none; appearance: none; bo
 /* ---------- お知らせの帯（デザインオプション） ---------- */
 
 /* ---------- ヘッダー ---------- */
-.hd { position: sticky; top: 0; z-index: 20; background-color: var(--c-bg, #ffffff); }
+.hd { position: sticky; top: 0; z-index: 20; background-color: var(--c-header-bg); color: var(--c-header-text); }
 .hd__in { display: grid; grid-template-columns: 1fr auto; align-items: center; min-height: 56px; gap: 16px; }
 @media (min-width: 1025px) { .hd__in { grid-template-columns: auto 1fr auto; } }
 .hd__logo .logoText { font-family: var(--font-head); font-weight: 400; font-size: 20px; letter-spacing: .04em; white-space: nowrap; }
@@ -66,7 +77,7 @@ input, select, textarea, button { -webkit-appearance: none; appearance: none; bo
 
 /* ---------- ドロワー（スマホ・タブレットのメニュー） ---------- */
 .drawer { position: fixed; inset: 0; z-index: 30; background: rgba(17, 17, 17, .35); }
-.drawer__in { position: absolute; top: 0; right: 0; bottom: 0; width: min(88vw, 400px); background: var(--c-bg, #ffffff); padding: 20px 20px 40px; overflow: auto; display: grid; gap: 24px; align-content: start; }
+.drawer__in { position: absolute; top: 0; right: 0; bottom: 0; width: min(88vw, 400px); background: var(--c-header-bg); color: var(--c-header-text); padding: 20px 20px 40px; overflow: auto; display: grid; gap: 24px; align-content: start; }
 .drawer__close { justify-self: end; border: 0; background: none; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; padding: 8px 0; }
 .drawer__nav ul { display: grid; gap: 0; }
 .drawer__nav li > a, .drawer__nav .nav__catBtn { display: block; width: 100%; text-align: left; padding: 14px 0; border-bottom: 1px solid var(--c-line); font-family: var(--font-head); font-size: 22px; letter-spacing: .02em; text-transform: none; }
@@ -107,12 +118,12 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 /* 縦長の人物写真を PC の横長枠で見せるとき、頭を枠の上端近くに置いて胸まで入れる（25% だと顔が中央に来て体が切れる） */
 .hero__slide img { object-position: 50% 31%; }
 .hero__slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0) 55%); }
-.hero__text { position: absolute; left: 16px; right: 16px; bottom: 28px; z-index: 1; color: #fff; }
+.hero__text { position: absolute; left: 16px; right: 16px; bottom: 28px; z-index: 1; color: var(--c-hero-text); }
 @media (min-width: 768px) { .hero__text { left: 32px; right: auto; bottom: 48px; max-width: 70%; } }
 @media (min-width: 1440px) { .hero__text { left: 48px; } }
-.hero__title { font-size: clamp(44px, 8vw, 120px); line-height: .98; color: inherit; }
+.hero__title { font-size: clamp(44px, 8vw, 120px); line-height: .98; color: var(--c-hero-title); }
 .hero__text p { margin: 12px 0 0; font-size: 14px; max-width: 44ch; }
-.hero__cta { display: inline-block; margin-top: 20px; padding: 14px 22px; background: #fff; color: #111; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+.hero__cta { display: inline-block; margin-top: 20px; padding: 14px 22px; background: var(--c-hero-btn-bg); color: var(--c-hero-btn-text); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
 .hero__dots { position: absolute; left: 0; right: 0; bottom: 10px; z-index: 1; display: flex; justify-content: center; gap: 6px; }
 .hero__dots span { width: 28px; height: 2px; background: rgba(255, 255, 255, .4); }
 .hero__dots span.is-on { background: #fff; }
@@ -331,7 +342,7 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .page a { text-decoration: underline; }
 .page input[type="text"], .page input[type="email"], .page input[type="tel"], .page textarea, .page select { width: 100%; border: 1px solid var(--c-text); background: transparent; padding: 12px 14px; min-height: 48px; margin: 4px 0 16px; }
 .page textarea { min-height: 160px; }
-.page input[type="submit"], .page button { min-height: 52px; padding: 0 28px; border: 1px solid var(--c-text); background: var(--c-text); color: var(--c-on-text, #fff); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.page input[type="submit"], .page button { min-height: 52px; padding: 0 28px; border: 1px solid var(--c-btn-bg); background: var(--c-btn-bg); color: var(--c-btn-text); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
 /* 320px では dd の字下げ 56px で本文が 200px ほどになるので、狭い画面だけ字下げを詰める。 */
 @media (max-width: 480px) { .page dd { margin-left: 20px; } }
 .page table { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -342,7 +353,7 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .page iframe { max-width: 100%; }
 
 /* ---------- フッター ---------- */
-.ft { border-top: 1px solid var(--c-rule); margin-top: 96px; padding: 32px 0 96px; }
+.ft { border-top: 1px solid var(--c-rule); margin-top: 96px; padding: 32px 0 96px; background: var(--c-footer-bg); color: var(--c-footer-text); }
 /* 商品ページは大きなショップ名が無いので、リンクの行を上下の真ん中に置く */
 .is-item .ft { padding: 40px 0; }
 .ft__big { font-family: var(--font-head); font-weight: 300; font-size: clamp(32px, 5vw, 72px); line-height: 1; margin: 0 0 24px; overflow-wrap: anywhere; }
@@ -382,7 +393,7 @@ html body .x_i18nSelectBox { height: auto; line-height: 1.4; border-radius: 0; }
 .x_i18nSelectBox:focus-visible { outline-offset: 2px; }
 .drawer__i18n #i18 { margin-top: 8px; }
 /* 購入ボタン（item-purchase） */
-.purchaseButton__btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 56px; margin-top: 8px; border: 1px solid var(--c-text); background: var(--c-text); color: var(--c-on-text, #fff); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; text-align: center; cursor: pointer; text-decoration: none; }
+.purchaseButton__btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 56px; margin-top: 8px; border: 1px solid var(--c-btn-bg); background: var(--c-btn-bg); color: var(--c-btn-text); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; text-align: center; cursor: pointer; text-decoration: none; }
 .purchaseButton__btn[disabled], .purchaseButton__btn--soldOut, .purchaseButton__btn--endOfSale, .purchaseButton__btn--comingSoonStay, .purchaseButton__btn--notApplying { background: transparent; color: var(--c-text); opacity: .55; cursor: default; text-align: center; }
 .purchaseButton__btn--requestRestockMail, .purchaseButton__btn--comingSoon { background: transparent; color: var(--c-text); }
 /* 数量・種類・商品オプション App（apps-item_option_app） */
@@ -418,17 +429,17 @@ html body .ageVerificationWarning { font-size: 32px; line-height: 1.3; font-fami
 .purchaseButtonModal__title, .salesPeriodModal__title { font-family: var(--font-head); font-size: 26px; margin: 0 0 12px; }
 .purchaseButtonModal__text, .salesPeriodModal__text, .purchaseButtonModal__subText, .salesPeriodModal__subText { font-size: 13px; margin: 0 0 12px; }
 .purchaseButtonModal__label, .salesPeriodModal__label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; margin: 12px 0 6px; }
-.purchaseButtonModal__input, .salesPeriodModal__input { width: 100%; min-height: 48px; border: 1px solid #111; padding: 0 14px; }
+.purchaseButtonModal__input, .salesPeriodModal__input { width: 100%; min-height: 48px; border: 1px solid var(--c-text); padding: 0 14px; }
 .purchaseButtonModal__inputArea { display: flex; align-items: center; gap: 8px; }
 .purchaseButtonModal__inputArea .purchaseButtonModal__input { width: 100px; text-align: center; }
 .purchaseButtonModal__error, .salesPeriodModal__error { color: var(--c-accent); font-size: 12px; margin: 8px 0; display: flex; gap: 6px; align-items: center; }
 .purchaseButtonModal__errorIcon, .salesPeriodModal__errorIcon { width: 14px; height: 14px; }
 .purchaseButtonModal__information { font-size: 12px; opacity: .7; margin: 12px 0; }
-.purchaseButtonModal__btn, .salesPeriodModal__btn { display: block; width: 100%; min-height: 52px; margin-top: 16px; border: 1px solid #111; background: #111; color: #fff; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.purchaseButtonModal__btn, .salesPeriodModal__btn { display: block; width: 100%; min-height: 52px; margin-top: 16px; border: 1px solid var(--c-btn-bg); background: var(--c-btn-bg); color: var(--c-btn-text); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
 .purchaseButtonModal__btn[disabled] { opacity: .4; cursor: default; }
-.purchaseButtonModal__btn--close, .salesPeriodModal__btn--close { background: transparent; color: #111; }
-html body #salesPeriodModal .salesPeriodModal__btn--submit, html body #salesPeriodModal .salesPeriodModal__btn--submit:hover { background: #111; border-color: #111; color: #fff; border-radius: 0; }
-html body #salesPeriodModal .salesPeriodModal__btn--close { background: transparent; color: #111; border: 1px solid #111; border-radius: 0; }
+.purchaseButtonModal__btn--close, .salesPeriodModal__btn--close { background: transparent; color: var(--c-text); }
+html body #salesPeriodModal .salesPeriodModal__btn--submit, html body #salesPeriodModal .salesPeriodModal__btn--submit:hover { background: var(--c-btn-bg); border-color: var(--c-btn-bg); color: var(--c-btn-text); border-radius: 0; }
+html body #salesPeriodModal .salesPeriodModal__btn--close { background: transparent; color: var(--c-text); border: 1px solid var(--c-text); border-radius: 0; }
 html body #salesPeriodModal .salesPeriodModal__container { border-radius: 0; }
 .purchaseButtonModal__closeIcon, .salesPeriodModal__closeIcon { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border: 0; background: none; cursor: pointer; }
 .purchaseButtonModal__closeIcon::before, .salesPeriodModal__closeIcon::before { content: "×"; font-size: 28px; line-height: 1; }
