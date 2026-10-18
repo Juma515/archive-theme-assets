@@ -258,8 +258,9 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 @media (max-width: 1024px) { .gallery[data-count="1"] .gallery__item { flex-basis: 100%; } }
 .item__info { position: sticky; top: 72px; padding-top: 8px; }
 .item__title { font-size: clamp(30px, 4vw, 46px); margin-bottom: 16px; overflow-wrap: anywhere; }
-.item__price { font-family: var(--font-head); font-size: 30px; font-weight: 400; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
-.item__price del { font-size: 16px; opacity: .65; }
+/* 価格は読み取りが最優先なので、見出しの書体（数字が古い字形）ではなく本文の書体で出す */
+.item__price { font-size: 22px; font-weight: 500; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
+.item__price del { font-size: 14px; opacity: .65; }
 .item__price .off { font-family: var(--font-body); font-style: normal; font-size: 12px; padding: 2px 8px; background: var(--c-accent); color: #fff; letter-spacing: .04em; }
 .price-row { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; width: 100%; }
 .price-row__label { font-family: var(--font-body); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .7; min-width: 7em; }
@@ -396,7 +397,7 @@ html body .ageVerificationWarning { font-size: 32px; line-height: 1.3; font-fami
 .preOrder, .takeout, .lottery, .communityLabel, .membershipPoint { border: 1px solid var(--c-text); padding: 10px 14px; margin: 0 0 12px; font-size: 12px; }
 .preOrder__label, .takeout__label, .lottery__label, .communityLabel__title { display: inline-block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px; background: var(--c-text); color: var(--c-on-text, #fff); margin-bottom: 6px; }
 .preOrder p, .lottery p, .communityLabel p { margin: 0; }
-.membershipPoint__amount { font-family: var(--font-head); font-size: 24px; margin-right: 4px; }
+.membershipPoint__amount { font-size: 20px; font-weight: 500; margin-right: 4px; }
 .salesPeriod { font-weight: 500; }
 /* 支払い方法タグ（syntax-payments）: ロゴの比率は変えない、折り返しに対応 */
 .paymentMethodsLogoTag { display: flex; flex-wrap: wrap; gap: 16px 24px; margin: 0; padding: 0; list-style: none; }
