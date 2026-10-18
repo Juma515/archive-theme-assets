@@ -68,7 +68,7 @@ input, select, textarea, button { -webkit-appearance: none; appearance: none; bo
 .hd__search { display: none; }
 @media (min-width: 1025px) { .hd__search { display: block; } }
 .search { display: flex; align-items: center; border-bottom: 1px solid var(--c-rule); }
-.search__input { border: 0; background: none; padding: 6px 0; width: 140px; min-width: 0; font-size: 13px; }
+.search__input { border: 0; background: none; padding: 6px 6px; width: 150px; min-width: 0; font-size: 13px; }
 .search__btn { border: 0; background: none; padding: 4px; cursor: pointer; display: grid; place-items: center; }
 .hd__i18n { display: none; }
 @media (min-width: 768px) { .hd__i18n { display: block; } }
