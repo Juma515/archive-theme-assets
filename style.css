@@ -44,8 +44,8 @@ input, select, textarea, button { -webkit-appearance: none; appearance: none; bo
 .nav__list > li { position: relative; }
 .nav__catBtn { border: 0; background: none; padding: 0; cursor: pointer; font-size: inherit; letter-spacing: inherit; text-transform: inherit; }
 .nav__catPanel { visibility: hidden; opacity: 0; transition: opacity .15s, visibility 0s linear .15s; position: absolute; top: 100%; left: -16px; min-width: 220px; padding: 16px; background: var(--c-bg, #ffffff); border: 1px solid var(--c-text); text-transform: none; letter-spacing: .04em; font-size: 13px; max-height: 70vh; overflow: auto; }
-/* 通りすがりのカーソルで開かないよう、乗せてから 0.3 秒後に出す。押したときは待たない */
-.nav__cat:hover .nav__catPanel { visibility: visible; opacity: 1; transition-delay: .3s; }
+/* 通りすがりのカーソルで開かないよう、乗せてから 0.12 秒後に出す。押したときは待たない */
+.nav__cat:hover .nav__catPanel { visibility: visible; opacity: 1; transition: opacity .1s; transition-delay: .12s; }
 .nav__cat.is-open .nav__catPanel { visibility: visible; opacity: 1; transition-delay: 0s; }
 .hd__tools { display: flex; align-items: center; gap: 14px; justify-self: end; }
 .hd__search { display: none; }
