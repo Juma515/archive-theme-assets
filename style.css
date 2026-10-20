@@ -346,6 +346,8 @@ html.js .rv.is-in { opacity: 1; transform: none; }
 .inquirySection h1 { text-transform: capitalize; }
 .page p { margin: 0 0 1em; }
 .page a { text-decoration: underline; }
+/* Blog の記事タイトルは見出しの中のリンクなので、本文リンクの下線は付けない */
+.page h1 a, .page h2 a, .page h3 a { text-decoration: none; }
 .page input[type="text"], .page input[type="email"], .page input[type="tel"], .page textarea, .page select { width: 100%; border: 1px solid var(--c-text); background: transparent; padding: 12px 14px; min-height: 48px; margin: 4px 0 16px; }
 .page textarea { min-height: 160px; }
 .page input[type="submit"], .page button { min-height: 52px; padding: 0 28px; border: 1px solid var(--c-btn-bg); background: var(--c-btn-bg); color: var(--c-btn-text); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
